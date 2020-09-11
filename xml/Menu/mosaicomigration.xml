@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/mosaicomigration</path>
+    <page_callback>CRM_Mosaicomigration_Form_Migration</page_callback>
+    <title>Mosaico Extension Directory Changes</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
