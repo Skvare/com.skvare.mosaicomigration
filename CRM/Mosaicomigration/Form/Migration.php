@@ -69,8 +69,6 @@ class CRM_Mosaicomigration_Form_Migration extends CRM_Core_Form {
 
   public function postProcess() {
     $values = $this->exportValues();
-
-    return;
     // Replace Domain in multiple tables.
     $this->_currentValue = $values['migration_find'];
     $this->_currentValueNameEncode = urlencode($this->_currentValue . '/');
