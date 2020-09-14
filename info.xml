@@ -20,6 +20,9 @@
   <compatibility>
     <ver>5.0</ver>
   </compatibility>
+  <requires>
+    <ext version="~1.1">uk.co.vedaconsulting.mosaico</ext>
+  </requires>
   <comments>This is a new, undeveloped module</comments>
   <classloader>
     <psr4 prefix="Civi\" path="Civi"/>
