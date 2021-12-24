@@ -121,15 +121,21 @@ class CRM_Mosaicomigration_Form_Migration extends CRM_Core_Form {
     $newDomain = $this->_newValue;
     $newDomainNameEncode = $this->_newValueNameEncode;
     $sqls = [];
-    $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, '{$currentDomainNameEncode}', '{$newDomainNameEncode}')";
-    $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, '{$currentDoamin}', '{$newDomain}')";
-    $sqls[] = "UPDATE civicrm_mosaico_template SET content = REPLACE(content, '{$currentDoamin}', '{$newDomain}')";
-    $sqls[] = "UPDATE civicrm_mosaico_template SET metadata = REPLACE(metadata, '{$currentDoamin}', '{$newDomain}')";
+    $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, %1, %2)";
+    $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, %3, %4)";
+    $sqls[] = "UPDATE civicrm_mosaico_template SET content = REPLACE(content, %3, %4)";
+    $sqls[] = "UPDATE civicrm_mosaico_template SET metadata = REPLACE(metadata, %3, %4)";
 
-    $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, '{$currentDomainNameEncode}', '{$newDomainNameEncode}')";
-    $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, '{$currentDoamin}', '{$newDomain}')";
+    $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, %1, %2)";
+    $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, %3, %4)";
+    $queryParams = [
+      1 => [$currentDomainNameEncode, 'String'],
+      2 => [$newDomainNameEncode, 'String'],
+      3 => [$currentDoamin, 'String'],
+      4 => [$newDomain, 'String'],
+    ];
     foreach ($sqls as $sql) {
-      CRM_Core_DAO::executeQuery($sql);
+      CRM_Core_DAO::executeQuery($sql, $queryParams);
       //CRM_Core_Error::debug_var('replaceDomain sql', $sql);
     }
   }
@@ -141,11 +147,15 @@ class CRM_Mosaicomigration_Form_Migration extends CRM_Core_Form {
     $currentPath = $this->_currentValue;
     $newPath = $this->_newValue;
     $sqls = [];
-    $sqls[] = "UPDATE civicrm_mosaico_template SET metadata = REPLACE(metadata, '{$currentPath}', '{$newPath}')";
-    $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, '{$currentPath}', '{$newPath}')";
-    $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, '{$currentPath}', '{$newPath}')";
+    $sqls[] = "UPDATE civicrm_mosaico_template SET metadata = REPLACE(metadata, %1, %2)";
+    $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, %1, %2)";
+    $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, %1, %2)";
+    $queryParams = [
+      1 => [$currentPath, 'String'],
+      2 => [$newPath, 'String'],
+    ];
     foreach ($sqls as $sql) {
-      CRM_Core_DAO::executeQuery($sql);
+      CRM_Core_DAO::executeQuery($sql, $queryParams);
       //CRM_Core_Error::debug_var('replacePath sql', $sql);
     }
   }
