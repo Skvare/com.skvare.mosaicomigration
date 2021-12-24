@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <extension key="com.skvare.mosaicomigration" type="module">
   <file>mosaicomigration</file>
-  <name>Extension Directory Changes</name>
-  <description>Mosaico Extension Directory Changes</description>
+  <name>Mosaico Extension Directory Changes</name>
+  <description>Mosaico Extension Directory Changes, use it when database is migrated from production to development environment, extension directory path is changed.</description>
   <license>AGPL-3.0</license>
   <maintainer>
     <author>Sunil Pawar</author>
