@@ -145,14 +145,20 @@ class CRM_Mosaicomigration_Form_Migration extends CRM_Core_Form {
    */
   function replacePath() {
     $currentPath = $this->_currentValue;
+    $currentPathEncode = $this->_currentValueNameEncode;
     $newPath = $this->_newValue;
+    $newPathEncode = $this->_newValueNameEncode;
     $sqls = [];
     $sqls[] = "UPDATE civicrm_mosaico_template SET metadata = REPLACE(metadata, %1, %2)";
     $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, %1, %2)";
+    $sqls[] = "UPDATE civicrm_mosaico_template SET html = REPLACE(html, %3, %4)";
     $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, %1, %2)";
+    $sqls[] = "UPDATE civicrm_mailing SET body_html = REPLACE(body_html, %3, %4)";
     $queryParams = [
       1 => [$currentPath, 'String'],
       2 => [$newPath, 'String'],
+      3 => [$currentPathEncode, 'String'],
+      4 => [$newPathEncode, 'String'],
     ];
     foreach ($sqls as $sql) {
       CRM_Core_DAO::executeQuery($sql, $queryParams);
