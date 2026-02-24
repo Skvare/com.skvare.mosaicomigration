@@ -93,7 +93,7 @@ class CRM_Mosaicomigration_Form_Migration extends CRM_Core_Form {
   function replaceJsonData() {
     $currentValue = $this->_currentValue;
     $newValue = $this->_newValue;
-    $selectSQL = "SELECT * FROM `civicrm_mailing` WHERE `template_options` LIKE '%uk.co.vedaconsulting.mosaico%'";
+    $selectSQL = "SELECT * FROM `civicrm_mailing` WHERE `template_options` LIKE '%mosaicoTemplate%'";
     $dao = CRM_Core_DAO::executeQuery($selectSQL);
     while ($dao->fetch()) {
       $templateOptions = json_decode($dao->template_options, TRUE);
